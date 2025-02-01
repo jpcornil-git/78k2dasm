@@ -110,6 +110,9 @@ def _mem_indexed(mem):
     except IndexError as exc:
         raise IllegalInstructionError("Illegal mem for adressing mode") from exc
         
+def _r1(opcode):
+    return ("C","B")[opcode & 0x01]
+
 def _mem1(opcode):
     return ("[DE]","[HL]")[opcode & 0x01]
 
@@ -580,7 +583,7 @@ def disassemble(rom, pc):
     # MULU and DIVUW rp
     elif (rom[pc] == 0b00000101) and ((rom[pc+1] & 0xe8) == 0x08):
         op = ("MULU", "DIVUW")[(rom[pc+1] >> 4) & 0x1]
-        rp = _regpair(rom[pc+1])
+        rp = _reg(rom[pc+1])
         asm = f"{op} {rp}"
         operands=(rom[pc+1], )
         
@@ -608,8 +611,12 @@ def disassemble(rom, pc):
 
     # ROR/ROL/RORC/ROLC/SHR/SHL/SHRW/SHLW r, n
     elif (rom[pc] & 0xfe) == 0b00110000:
-        op = ("RORC", "ROR", "SHR", "SHRW", "ROLC", "ROL", "SHL", "SHLW")[(rom[pc+1] >> 6) & 0x03 + ((rom[pc] & 0x01) << 2)]
-        r = _reg(rom[pc+1])
+        ra = ((rom[pc+1] >> 6) & 0x03) + ((rom[pc] & 0x01) << 2)
+        op = ("RORC", "ROR", "SHR", "SHRW", "ROLC", "ROL", "SHL", "SHLW")[ra]
+        if (ra & 0x03) == 0x3:
+            r = _regpair(rom[pc+1])
+        else:
+            r = _reg(rom[pc+1])
         n = (rom[pc+1] >> 3) & 0x07
         asm = f"{op} {r}, {n:1d}"
         operands=(rom[pc+1], )
@@ -775,10 +782,10 @@ def disassemble(rom, pc):
 
     # SET1/CLR1 saddr.bit
     elif ((rom[pc] & 0xe8) == 0b10100000):
-        op = ("SET1", "CLR1")[(rom[pc] >> 4) & 0x1]
+        op = ("CLR1", "SET1")[(rom[pc] >> 4) & 0x1]
         saddr = _I16(_saddr(rom[pc+1]))
         bit = rom[pc] & 0x7
-        asm = f"{op} {saddr}.{bit:1d}"
+        asm = f"{op} {{0}}.{bit:1d}"
         asm_args = (
             (saddr, ArgumentTypes.ReferencedAddress),
         )
@@ -864,7 +871,7 @@ def disassemble(rom, pc):
     # BRK/RET/RETI/RETB
     elif ((rom[pc] & 0xf6) == 0b01010110):
         flow_type = FlowTypes.Stop if (rom[pc] == 0b01011110) else FlowTypes.SubroutineReturn
-        asm = ("RET", "RETI", "BRK", "RETB")[((rom[pc] & 0x08) >> 2) + rom[pc] & 0x01]
+        asm = ("RET", "RETI", "BRK", "RETB")[((rom[pc] & 0x08) >> 2) + (rom[pc] & 0x01)]
 
     # PUSH/POP rp
     elif ((rom[pc] & 0xf4) == 0b00110100):
@@ -1044,7 +1051,7 @@ def disassemble(rom, pc):
     # DBNZ r1, $addr16
     elif (rom[pc] & 0xfe) == 0b00110010:
         flow_type = FlowTypes.ConditionalJump
-        r1 = _mem1(rom[pc])
+        r1 = _r1(rom[pc])
         target_address = _I16(pc + 2 + (rom[pc+1] & 0x7f) - (rom[pc+1] & 0x80))
         asm = f"DBNZ {r1}, {{0}}"
         asm_args = (
