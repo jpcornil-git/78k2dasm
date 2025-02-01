@@ -79,7 +79,10 @@ def _regpair(opcode):
     return ('AX', 'BC', 'DE', 'HL')[rp]
 
 def _saddr(low):
-    saddr = 0xfe00 + low
+    if low < 0x20:
+        saddr = 0xff00 + low
+    else:
+        saddr = 0xfe00 + low
     return saddr
 
 def _sfr(low):
