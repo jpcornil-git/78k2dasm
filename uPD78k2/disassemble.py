@@ -254,8 +254,8 @@ def disassemble(rom, pc):
 
     # MOV saddr, saddr’
     elif rom[pc] == 0b00111000:
-        saddr  = _I16(_saddr(rom[pc+1]))
-        saddrp = _I16(_saddr(rom[pc+2]))
+        saddrp = _I16(_saddr(rom[pc+1]))
+        saddr  = _I16(_saddr(rom[pc+2]))
         asm = f"MOV {{0}}, {{1}}"
         asm_args = (
             (saddr, ArgumentTypes.ReferencedAddress),
@@ -368,8 +368,8 @@ def disassemble(rom, pc):
 
     # XCH saddr, saddr’
     elif rom[pc] == 0b00111001:
-        saddr = _I16(_saddr(rom[pc+1]))
-        saddrp = _I16(_saddr(rom[pc+2]))
+        saddrp = _I16(_saddr(rom[pc+1]))
+        saddr  = _I16(_saddr(rom[pc+2]))
         asm = f"XCH {{0}}, {{1}}"
         asm_args = (
             (saddr , ArgumentTypes.ReferencedAddress),
@@ -522,8 +522,8 @@ def disassemble(rom, pc):
     # ADD/ADDC/SUB/SUBC/AND/OR/XOR/CMP A, saddr/saddr'
     elif (rom[pc] & 0xf8) == 0b01111000:
         op = _math_ops(rom[pc])
-        saddr = _I16(_saddr(rom[pc+1]))
-        saddrp = _I16(_saddr(rom[pc+2]))
+        saddrp = _I16(_saddr(rom[pc+1]))
+        saddr  = _I16(_saddr(rom[pc+2]))
         asm = f"{op} {{0}}, {{1}}"
         asm_args = (
             (saddr, ArgumentTypes.ReferencedAddress),
