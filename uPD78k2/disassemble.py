@@ -307,20 +307,14 @@ def disassemble(rom, pc):
     # MOV A, !addr16 and MOV A, &!addr16
     elif (rom[pc] == 0b00001001) and (rom[pc+1] == 0b11110000):
         addr16 = _I16(_addr16(rom[pc+2], rom[pc+3]))
-        asm = f"MOV A, {mem_prefix}!{{0}}"
-        asm_args = (
-            (addr16, ArgumentTypes.ReferencedAddress),
-        )
+        asm = f"MOV A, {mem_prefix}!{addr16}"
         opcodes.append(rom[pc+1])
         operands=(rom[pc+2], rom[pc+3])
 
     # MOV !addr16, A and MOV &!addr16, A
     elif (rom[pc] == 0b00001001) and (rom[pc+1] == 0b11110001):
         addr16 = _I16(_addr16(rom[pc+2], rom[pc+3]))
-        asm = f"MOV {mem_prefix}!{{0}}, A"
-        asm_args = (
-            (addr16, ArgumentTypes.ReferencedAddress),
-        )
+        asm = f"MOV {mem_prefix}!{addr16}, A"
         opcodes.append(rom[pc+1])
         operands=(rom[pc+2], rom[pc+3])
 
@@ -519,7 +513,7 @@ def disassemble(rom, pc):
             asm_args = (
                 (saddr,  ArgumentTypes.ReferencedAddress),
             )
-        asm = f"{0} A, {1}"
+        asm = f"{op} A, {{0}}"
         operands=(rom[pc+1],)
 
     # ADD/ADDC/SUB/SUBC/AND/OR/XOR/CMP A, saddr/saddr'
