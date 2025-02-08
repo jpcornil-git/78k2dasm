@@ -1,0 +1,24 @@
+P0 = Output
+    P3/2/1/0 Keyboard matrix - select row
+
+P2 = Inputs P2.5/4/1/0 used after keyb scan ?
+    P2.0; Another CS
+    P2.1: 3W CS ? only used in csi_irq_handler
+    P2.6: Display ready or alike
+    P2.7: MISO
+
+P3 = CSI port; 
+   *P3.0: RxD
+   *P3.1: TxD
+    P3.2: SCK 
+    P3.3: MOSI
+    P3.4: TO0 output (4.9KHz clk) ??
+    P3.5: Display CS ?
+    P3.6: Display WR1 ?
+    P3.7: Display WR2 ?
+P6 = Exp. memory A16-19/lsb + chip select/msb
+    P6.7: Cartridge select (Sactive low)
+
+P7 = Inputs
+    PT.3/2/1/0 Keyboard matrix read col
+    P7.4 Used to skip cartridge init (button ?)

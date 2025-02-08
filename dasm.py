@@ -58,7 +58,7 @@ if __name__ == '__main__':
         0x0024, # INTST
         0x0026, # INTCSI
         0x0028, # INTEER
-#        0x002a, # INTEPW
+        0x002a, # INTEPW
         0x002c, # (unused)
         0x002e, # (unused)
         0x0030, # (unused)
@@ -74,7 +74,8 @@ if __name__ == '__main__':
     callt_vectors = list(range(0x42, 0x7f, 2))
     all_vectors = hardware_vectors + callt_vectors
 
-    entry_points = []
+    entry_points = [
+    ]
 
     start_address = 0
     #traceable_range = range(start_address, start_address + len(rom) + 1)

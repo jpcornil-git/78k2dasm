@@ -1,0 +1,96 @@
+e5c8:  / PROM TEST /
+e5d7:  BANK 0 CHECK
+0x1a
+e5e5: 0x31 0x08 1
+e5ea: 0x31 0x08 2
+e5ee: 0x31 0x08 3
+e5f2: 0x31 0x08 4
+e5f6: 0x31 0x08 5
+e5fa: 0x31 0x08 6
+e5fe: 0x31 0x08 7
+e602:  /// ERROR ///
+0x1a
+e611: 0x09 0x10 CHECKSUM 
+e61e: / SRAM TEST /
+e62d: ON BOARD
+e637: CHECK ...
+0x1a
+e642: /// ERROR ///
+e652: ON BOAD
+0x1a
+e65b: 0x09 0x10 ADDRESS 
+e667:  / KEY  TEST /
+0x1a
+e676: 1
+e679: 2
+e67b: 3
+e67d: 4
+e67f: 5
+e681: 6
+e683: 7
+e685: 8
+e687: 9
+e689: 0
+e68b: .
+e68d: C
+e68f: ADVICE
+e696: DC
+e699: M/B
+e69d: OK
+e6a0: UP
+e6a3: DOWN
+e6a8: LEFT
+e6ad: RIGHT
+e6b3: 0x11 0x18 KEY
+e6b9: 0x01 0x10 CURSOL
+e6c2:  // FB TEST //
+0x1a
+e6d1: 0x21 0x08 SEC = 
+e6db: 0x21 0x10 !ID = 
+e6e3: 0x21 0x10 !E = 
+e6ea: 0x21 0x10 !TIME UP
+e6f4:  / SRAM TEST /
+e703:  CARTRIDGE
+0x1a
+e70e: NO CARTRIDGE
+e71c: PPD100-KH930
+e729: PPD100-KH933
+e736: PPD110-KH930
+e743: PPD110-KH900
+e750: PPD110-KH933
+e75d: PPD110-KH940
+e76a: MOYOU
+e770: KH970
+e776: NOT FORMAT
+
+ed4f: (((( TEST )))) 
+ed5f: CB VER.    .   
+ed6f: KH VER.   .    
+ed7f: KH TYPE.       
+ed8f: 0 ROM   4 FB   
+ed9f: 1 KEY   5 KLG  
+edaf: 2 LCD   6 POS  
+edbf: 3 CART  C RAM  
+edcf: ((( PH TEST )))
+eddf: LS   CNT   RS  
+edef: V1   V2    BP  
+edff:      CHG       
+ee0f: (( SOL TEST )) 
+ee1f:                
+ee2f:                
+ee3f:                
+ee4f: (( KLG TEST )) 
+ee5f: K              
+ee6f: L              
+ee7f: G              
+ee8f: (( POS TEST )) 
+ee9f:                
+eeaf:                
+eebf:                
+eecf: K ON  0000 )   
+eedf: K OFF 0000     
+eeef: L ON  0000     
+eeff: L OFF 0000     
+ef0f: 0 PH    4 WORK 
+ef1f: 1 SOL   5      
+ef2f: 2 ONOFF 6    
