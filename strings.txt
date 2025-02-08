@@ -1,3 +1,5 @@
+1103: 0x30 0x01  BROTHER970 V1.0a
+
 e5c8:  / PROM TEST /
 e5d7:  BANK 0 CHECK
 0x1a
