@@ -1,5 +1,5 @@
-P0 = Output
-    P3/2/1/0 Keyboard matrix - select row
+P0 = Output - lcd output port
+    P3/2/1/0 Keyboard matrix - select row (overlay ?)
 
 P2 = Inputs P2.5/4/1/0 used after keyb scan ?
     P2.0; Another CS
@@ -16,10 +16,10 @@ P3 = CSI port;
    *P3.1: TxD
     P3.2: SCK 
     P3.3: MOSI
-    P3.4: TO0 output (4.9KHz clk), display clk ??
-    P3.5: Display CS ?
-    P3.6: Display WR1 ?
-    P3.7: Display WR2 ?
+    P3.4: TO0 output (4.9KHz clk), SED1520 clk ??
+    P3.5: SED1520 A0 (ctrl=0/data=1), CS always active (// with keypad on P0 ?)
+    P3.6: SED1520 #0 WR
+    P3.7: SED1520 #1 WR
 
 P6 = Exp. memory A16-19/lsb + chip select/msb
     P6.7: Cartridge select (Sactive low)
